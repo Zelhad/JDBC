@@ -3,6 +3,7 @@ package serviceImpl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import dao.ProductDao;
 import entities.AgreementItemRef;
+import entities.BillingAccountRef;
 import entities.Product;
 import service.ProductService;
 
@@ -58,13 +60,15 @@ public class ProductServiceImpl implements ProductService {
 				products.add(new Product(id, href, description, is_bundle, is_customer_visible, name, order_date,
 						product_serial_number, start_date, termination_date));
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
 		return products;
 	}
 
 	@Override
-	public List<AgreementItemRef> findAllAgreementItemRef() throws java.sql.SQLException{
+	public List<AgreementItemRef> findAllAgreementItemRef() throws java.sql.SQLException {
 		List<AgreementItemRef> agreementItemRefs = new ArrayList<>();
 		String sql = "SELECT *  FROM agreement_item_ref";
 		try (Connection conn = dao.getConnection();
@@ -79,7 +83,7 @@ public class ProductServiceImpl implements ProductService {
 				String schema_location = resultSet.getString("schema_location");
 				String type = resultSet.getString("type");
 				String referred_type = resultSet.getString("referred_type");
-				
+
 				agreementItemRefs.add(new AgreementItemRef(id, href, agreement_item_id, name, base_type,
 						schema_location, type, referred_type
 
@@ -88,6 +92,36 @@ public class ProductServiceImpl implements ProductService {
 			}
 
 			return agreementItemRefs;
-		} 
+		}
+	}
+
+	@Override
+	public List<BillingAccountRef> findBillingAccountRef() throws SQLException {
+		List<BillingAccountRef> billingAccountRefs = new ArrayList<>();
+		String sql = "SELECT * FROM  billing_account_ref";
+		try (Connection comm = dao.getConnection();
+				PreparedStatement statement = comm.prepareStatement(sql);
+				ResultSet resultSet = statement.executeQuery();) {
+			while (resultSet.next()) {
+				/*
+				 * id base_type referred_type schema_location type href name
+				 * 
+				 */
+				String id= resultSet.getString("id");
+				String base_type= resultSet.getString("base_type");
+				String referred_type =resultSet.getString("referred_type");
+				String schemaLocation= resultSet.getString("schema_location");
+				String type =resultSet.getString("type");
+				String href =resultSet.getString("name");
+				String name =resultSet.getString("name");
+				billingAccountRefs.add(new BillingAccountRef(id, base_type, referred_type, schemaLocation, type, href, name));
+			}
+			return billingAccountRefs;
+
+		} catch (SQLException exception) {
+			exception.printStackTrace();
+		}
+
+		return billingAccountRefs;
 	}
 }
