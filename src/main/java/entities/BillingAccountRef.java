@@ -3,25 +3,20 @@ package entities;
 import java.util.Objects;
 
 public class BillingAccountRef {
+
 	private String id;
 	private String baseType;
-
 	private String referredType;
-
 	private String schemaLocation;
-
 	private String type;
-
 	private String href;
-
 	private String name;
 
 	public BillingAccountRef() {
-
 	}
 
 	public BillingAccountRef(String id, String baseType, String referredType, String schemaLocation, String type,
-			String href, String id2, String name) {
+			String href, String name) {
 		this.id = id;
 		this.baseType = baseType;
 		this.referredType = referredType;
@@ -112,8 +107,4 @@ public class BillingAccountRef {
 		return "BillingAccountRef [id=" + id + ", baseType=" + baseType + ", referredType=" + referredType
 				+ ", schemaLocation=" + schemaLocation + ", type=" + type + ", href=" + href + ", name=" + name + "]";
 	}
-	
-	
-	
-
 }
