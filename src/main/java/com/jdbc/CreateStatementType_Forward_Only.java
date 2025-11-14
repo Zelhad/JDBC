@@ -14,7 +14,7 @@ Thrown Exceptions:
 SQLException - if a database access error occurs or this method is called on a closed connection
  */
 
-package com.jdbc.com.jdbc;
+package com.jdbc;
 
 public class CreateStatementType_Forward_Only {
 	private java.sql.Statement stmt;
