@@ -2,10 +2,12 @@ package utils;
 
 import java.sql.Timestamp;
 import java.time.DayOfWeek;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 
@@ -49,7 +51,7 @@ public class JdbcDateTimes {
 		 */
 
 		OffsetDateTime offsetDateTime = OffsetDateTime.now();
-		System.out.println(offsetDateTime);
+		// System.out.println(offsetDateTime);
 
 		/*
 		 * JShell Exercise 5 (Java Date–Time API)
@@ -78,7 +80,7 @@ public class JdbcDateTimes {
 		 */
 		LocalDate dofb = LocalDate.of(1989, 10, 26);
 		LocalDate plusDays = dofb.plusDays(100);
-		System.out.println("PLUS 100 Days -->" + plusDays);
+		// System.out.println("PLUS 100 Days -->" + plusDays);
 
 		/*
 		 * 📝 JShell Exercise 8 (Java Date–Time API)
@@ -101,7 +103,7 @@ public class JdbcDateTimes {
 
 		LocalDate currentDate = LocalDate.now();
 		DayOfWeek dayOfWeek = currentDate.getDayOfWeek();
-		System.out.println(dayOfWeek);
+		// System.out.println(dayOfWeek);
 
 		/**
 		 * 
@@ -118,7 +120,7 @@ public class JdbcDateTimes {
 		LocalDate currentLocalDate = LocalDate.now();
 		LocalDate nextBirth = LocalDate.of(2026, 10, 26);
 		long between = ChronoUnit.DAYS.between(currentLocalDate, nextBirth);
-		System.out.println(between);
+		// System.out.println(between);
 		/*
 		 * JShell Exercise 11 (Java Date–Time API)
 		 * 
@@ -127,7 +129,7 @@ public class JdbcDateTimes {
 		 */
 		LocalTime provivedTime = LocalTime.of(9, 30);
 		LocalTime plusMinutes = provivedTime.plusMinutes(45);
-		System.out.println(plusMinutes);
+		// System.out.println(plusMinutes);
 
 		/*
 		 * 
@@ -146,7 +148,7 @@ public class JdbcDateTimes {
 
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		LocalDateTime minusMinutes = currentDateTime.plusWeeks(2).plusHours(3).minusMinutes(15);
-		System.out.println(minusMinutes);
+		// System.out.println(minusMinutes);
 
 		/*
 		 * Step 13: Convert to OffsetDateTime UTC
@@ -159,7 +161,7 @@ public class JdbcDateTimes {
 		 */
 		Timestamp ts = Timestamp.valueOf("2024-01-05 14:22:00");
 		OffsetDateTime atOffset = ts.toInstant().atOffset(ZoneOffset.UTC);
-		System.out.println(atOffset);
+		// System.out.println(atOffset);
 
 		/*
 		 * Exercise 14 (Database-Style Challenge)
@@ -176,6 +178,93 @@ public class JdbcDateTimes {
 		 * Print both.
 		 * 
 		 */
+		OffsetDateTime ofdt = offsetDateTime.now();
+		Instant instant = ofdt.toInstant();
+		Timestamp from = Timestamp.from(instant);
+
+		Timestamp tsc = Timestamp.from(OffsetDateTime.now().toInstant());
+
+		// System.out.println(tsc);
+		/*
+		 * Create:
+		 * 
+		 * A Timestamp ts = Timestamp.valueOf("2024-04-22 15:30:00")
+		 * 
+		 * Convert it to OffsetDateTime using ZoneOffset.systemDefault()
+		 * 
+		 * Display the result
+		 */
+		Timestamp tsmp = Timestamp.valueOf("2024-04-22 15:30:00");
+		// Break to have a look at ZoneId
+
+		// Set<String> availableZoneIds = java.time.ZoneId.getAvailableZoneIds();
+
+		// for(String zoneId : availableZoneIds ) {
+		// System.out.println(zoneId);
+		// }
+		// System.out.println(availableZoneIds);
+		// availableZoneIds.add("zahoId");
+
+		// ZoneOffset offset =
+		// java.time.ZoneId.systemDefault().getRules().getOffset(Instant.now());
+		// System.out.println(offset);
+
+		/*
+		 * Exercise 15 – System Timezone Conversion
+		 * 
+		 * Task:
+		 * 
+		 * Create a Timestamp:
+		 * 
+		 * Timestamp ts = Timestamp.valueOf("2024-04-22 15:30:00");
+		 * 
+		 * 
+		 * Convert it to an OffsetDateTime using your system’s default zone.
+		 * 
+		 * Print the result.
+		 */
+		Timestamp tss = Timestamp.valueOf("2024-04-22 15:30:00");
+		int timezoneOffset = tss.getTimezoneOffset();
+		System.out.println("Time stam" + timezoneOffset);
+		OffsetDateTime ofInstant = OffsetDateTime.ofInstant(Instant.now(), ZoneId.systemDefault());
+		System.out.println(ofInstant);
+		
+
+		/*
+		 * AI REPLY TO LOOK AT IT LATER 
+		 * Timestamp tss = Timestamp.valueOf("2024-04-22 15:30:00");
+		 * 
+		 * // Step 1: Convert Timestamp to Instant Instant instant = tss.toInstant();
+		 * 
+		 * // Step 2: Get system timezone ZoneId systemZone = ZoneId.systemDefault();
+		 * 
+		 * // Step 3: Get current offset in that zone ZoneOffset offset =
+		 systemZone.getRules().getOffset(instant);
+		 * 
+		 * // Step 4: Build OffsetDateTime OffsetDateTime odt =
+		 * instant.atOffset(offset);
+		 * 
+		 * System.out.println(odt);
+		 *  back to insertion into our jdbc
+		 */
+		
+		//SQL Timestamp → OffsetDateTime(When reading from DB)
+		//OffsetDateTime odt = ts.toInstant().atOffset(ZoneOffset.UTC);
+		//—or system zone—
+		//OffsetDateTime odt = ts.toInstant().atOffset(ZoneId.systemDefault().getRules().getOffset(ts.toInstant()));
+		
+		
+		//OffsetDateTime → SQL Timestamp
+		//(When saving back to DB)
+		//Timestamp ts = Timestamp.from(odt.toInstant());
+
+
+		
+
+		
+		
+		
+		
 
 	}
 }
