@@ -4,11 +4,12 @@ import java.io.IOException;
 
 import dao.ProductDao;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import serviceImpl.ProductServiceImpl;
 
-@jakarta.servlet.annotation.WebServlet("/AgreementItemRefs")
+@WebServlet("/agreements")
 public class AgreementItemRefServlet extends jakarta.servlet.http.HttpServlet {
 	
     private ProductServiceImpl productService;

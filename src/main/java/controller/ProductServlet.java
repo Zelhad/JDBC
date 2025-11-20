@@ -15,28 +15,34 @@ import serviceImpl.ProductServiceImpl;
 @WebServlet("/products")
 public class ProductServlet extends jakarta.servlet.http.HttpServlet {
 
-    private ProductServiceImpl productService;
+	private ProductServiceImpl productService;
 
-    @Override
-    public void init() {
-     
-        ProductDao dao = new ProductDao();
-        productService = new ProductServiceImpl(dao);
-    }
+	@Override
+	public void init() {
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+		ProductDao dao = new ProductDao();
+		productService = new ProductServiceImpl(dao);
+	}
 
-        try {
-            List<Product> products = productService.findAll();
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-            req.setAttribute("products", products);
+		try {
+			List<Product> products = productService.findAll();
 
-            req.getRequestDispatcher("products.jsp").forward(req, resp);
+			req.setAttribute("products", products);
 
-        } catch (SQLException e) {
-            throw new ServletException("Database error in /products", e);
-        }
-    }
+			req.getRequestDispatcher("products.jsp").forward(req, resp);
+
+		} catch (SQLException e) {
+			throw new ServletException("Database error in /products", e);
+		}
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//we have the post   servlet to handl the comming data from the user
+
+	}
+
 }

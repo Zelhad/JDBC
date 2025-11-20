@@ -56,7 +56,7 @@ public void setDescription(String description) {
 	this.description = description;
 }
 
-public boolean isIs_bundle() {
+public boolean is_bundle() {
 	return is_bundle;
 }
 
@@ -64,7 +64,7 @@ public void setIs_bundle(boolean is_bundle) {
 	this.is_bundle = is_bundle;
 }
 
-public boolean isIs_customer_visible() {
+public boolean is_customer_visible() {
 	return is_customer_visible;
 }
 

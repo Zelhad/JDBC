@@ -31,7 +31,7 @@
             <td><%= p.getHref() %></td>
             <td><%= p.getName() %></td>
             <td><%= p.getDescription() %></td>
-            <td><%= p.isIs_customer_visible() %></td>
+            <td><%= p.is_customer_visible() %></td>
             <td><%= p.getOrder_date() %></td>
             <td><%= p.getProduct_serial_number() %></td>
             <td><%= p.getStart_date() %></td>

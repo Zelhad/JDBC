@@ -228,43 +228,36 @@ public class JdbcDateTimes {
 		System.out.println("Time stam" + timezoneOffset);
 		OffsetDateTime ofInstant = OffsetDateTime.ofInstant(Instant.now(), ZoneId.systemDefault());
 		System.out.println(ofInstant);
-		
 
 		/*
-		 * AI REPLY TO LOOK AT IT LATER 
-		 * Timestamp tss = Timestamp.valueOf("2024-04-22 15:30:00");
+		 * AI REPLY TO LOOK AT IT LATER Timestamp tss =
+		 * Timestamp.valueOf("2024-04-22 15:30:00");
 		 * 
 		 * // Step 1: Convert Timestamp to Instant Instant instant = tss.toInstant();
 		 * 
 		 * // Step 2: Get system timezone ZoneId systemZone = ZoneId.systemDefault();
 		 * 
 		 * // Step 3: Get current offset in that zone ZoneOffset offset =
-		 systemZone.getRules().getOffset(instant);
+		 * systemZone.getRules().getOffset(instant);
 		 * 
 		 * // Step 4: Build OffsetDateTime OffsetDateTime odt =
 		 * instant.atOffset(offset);
 		 * 
-		 * System.out.println(odt);
-		 *  back to insertion into our jdbc
+		 * System.out.println(odt); back to insertion into jdbc of object product
 		 */
-		
-		//SQL Timestamp → OffsetDateTime(When reading from DB)
-		//OffsetDateTime odt = ts.toInstant().atOffset(ZoneOffset.UTC);
-		//—or system zone—
-		//OffsetDateTime odt = ts.toInstant().atOffset(ZoneId.systemDefault().getRules().getOffset(ts.toInstant()));
-		
-		
-		//OffsetDateTime → SQL Timestamp
-		//(When saving back to DB)
-		//Timestamp ts = Timestamp.from(odt.toInstant());
 
+		// SQL Timestamp → OffsetDateTime(When reading from DB)
+		// OffsetDateTime odt = ts.toInstant().atOffset(ZoneOffset.UTC);
+		// —or system zone—
+		// OffsetDateTime odt =
+		// ts.toInstant().atOffset(ZoneId.systemDefault().getRules().getOffset(ts.toInstant()));
 
-		
+		// OffsetDateTime → SQL Timestamp
+		// (When saving back to DB)
+		// Timestamp ts = Timestamp.from(odt.toInstant());
 
-		
-		
-		
-		
+		// Format the current LocalDateTime
+		LocalDateTime now = LocalDateTime.now();
 
 	}
 }

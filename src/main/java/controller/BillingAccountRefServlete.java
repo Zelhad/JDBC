@@ -13,9 +13,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import service.ProductService;
 import serviceImpl.ProductServiceImpl;
 
-@WebServlet("/billingsAccountRefs")
+@WebServlet("/billings")
 public class BillingAccountRefServlete extends HttpServlet {
-	
+
 	private ProductService productService;
 
 	@Override
@@ -36,5 +36,4 @@ public class BillingAccountRefServlete extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
 }
