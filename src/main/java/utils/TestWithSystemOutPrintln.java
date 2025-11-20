@@ -1,5 +1,7 @@
 package utils;
 
+import java.time.OffsetDateTime;
+
 import dao.ProductDao;
 import serviceImpl.ProductServiceImpl;
 
@@ -84,15 +86,19 @@ public class TestWithSystemOutPrintln {
 
 		//scanner.nextLine();
 		System.out.println("Provide Order product date");
-		String order_date = scanner.nextLine();
-		//System.out.println(order_date);
+		String order_date = scanner.nextLine().trim();
+		
+		
+		// Define formatter matching your string
+		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ssXXX");
+		//We did solved the OffsetDateTime parsing .  we make a break I think I did know the basics to begin King SPRING
+		//LET'S CREATE A PROJECT SPRING BUT TIME TO TIME  WE MAKE UPDATE ON THIS BASIC PROJECT.
+		//
 
-		// java.sql.Timestamp.from(Instant.)
+		// Parse into OffsetDateTime
+		OffsetDateTime odt = OffsetDateTime.parse(order_date);
 
-		// OffsetDateTime offsetDateTime = OffsetDateTime.parse()
-
-		// System.out.println(offsetDateTime);
-
+		System.out.println("Parsed date: " + odt);
 		System.out.println("Your id is -----> " + id + "\nhref --->" + href + "\ndescription --->" + description
 				+ "\nis bundle ---->" + isBundle + "\ncostumer  visible --->" + isCostomerVisible + "\n name -->"
 				+ productName + " Order date -->" + order_date);
